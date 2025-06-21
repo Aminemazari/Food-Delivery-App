@@ -21,33 +21,69 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+  SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  Poppins: require('../assets/fonts/Poppins-Regular.ttf'),
+  Sen: require('../assets/fonts/Sen-Regular.ttf'),  });
 
   if (!loaded) return null;
 
-  // 🔥 Define and override Paper theme colors
-  const lightTheme = {
-    ...PaperLightTheme,
-    colors: {
-      ...PaperLightTheme.colors,
-      primary: '#FF7622', // your custom primary color
-      secondary: '#FFC107',
-      background: '#FFFFFF',
-      surface: '#FFFFFF',
-      text: '#000000',
+ const lightTheme = {
+  ...PaperLightTheme,
+  colors: {
+    ...PaperLightTheme.colors,
+    primary: '#ef9f27',
+    secondary: '#7a869a',
+  },
+  fonts: {
+    // Default variants (required by Paper)
+    regular: {
+      fontFamily: 'Poppins',
+      fontWeight: '700',
     },
-  };
-
+    medium: {
+      fontFamily: 'Poppins',
+      fontWeight: '500',
+    },
+    light: {
+      fontFamily: 'Sen',
+      fontWeight: '300',
+    },
+    thin: {
+      fontFamily: 'Sen',
+      fontWeight: '200',
+    },
+    // Add missing variants (used by Button, Text, etc.)
+    labelLarge: {
+      fontFamily: 'Poppins',
+      fontWeight: '500',
+      fontSize: 14,
+      lineHeight: 20,
+      letterSpacing: 0.1,
+    },
+    labelMedium: {
+      fontFamily: 'Poppins',
+      fontWeight: '500',
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: 0.5,
+    },
+    labelSmall: {
+      fontFamily: 'Poppins',
+      fontWeight: '500',
+      fontSize: 11,
+      lineHeight: 16,
+      letterSpacing: 0.5,
+    },
+  },
+};
   const darkTheme = {
     ...PaperDarkTheme,
     colors: {
       ...PaperDarkTheme.colors,
-      primary: '#FF5A5F',
-      secondary: '#FFC107',
+      
       background: '#121212',
-      surface: '#1E1E1E',
-      text: '#FFFFFF',
+      
+      
     },
   };
 
@@ -59,6 +95,8 @@ export default function RootLayout() {
       <ThemeProvider value={navigationTheme}>
         <Stack initialRouteName='welcome'>
           <Stack.Screen name="welcome" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
