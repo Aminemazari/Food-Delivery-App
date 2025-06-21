@@ -1,14 +1,13 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,View} from 'react-native';
 import { Button } from 'react-native-paper';
+import SearchBar from '@/components/ui/SearchBar';
 export default function HomeScreen() {
  
 
   return (
-  <>
-    <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')} textColor="#fff">
-    Press me
-  </Button>
-  </>
+  <View  style={{}}>
+    <SearchBar></SearchBar>
+  </View>
    
   );
 }

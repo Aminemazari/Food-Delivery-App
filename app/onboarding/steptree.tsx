@@ -8,7 +8,7 @@ import { useRouter } from 'expo-router';
 export default function Onboarding() {
   const router = useRouter();
     const handleClick = ()=>{ 
-    router.push('/signin') 
+    router.push('../signin') 
   }
   
   return (

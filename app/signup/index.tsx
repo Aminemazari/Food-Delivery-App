@@ -1,44 +1,67 @@
-import { Link, useRouter } from "expo-router";
-import {Image, View, Text, StyleSheet} from "react-native";
-import { TextInput,Button } from 'react-native-paper';
-import PrimaryButton from "@/components/ui/primaryButon";
-import theme from "../theme/theme";
-import { useState } from "react";
 import CustomTextInput from "@/components/ui/CustomTextInput";
 import PasswordInput from "@/components/ui/PasswordInput";
-import { Pressable } from 'react-native';
-export default function Signin() {
+import PrimaryButton from "@/components/ui/primaryButon";
+import { Link, useRouter } from "expo-router";
+import { useState } from "react";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Button } from 'react-native-paper';
+import theme from "../theme/theme";
+export default function SignUp() {
   const router = useRouter();
   const handleClick = () => {
     router.push('/address');
   }; 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [username, setUsername] = useState("")
 
   return (
     <View style={styles.container}>
       <Image source={require("../../assets/images/Cook.png")} style={styles.imagePlaceholder} />
-      <Text style={styles.title}>Welcome Back!</Text>
-      <Text style={styles.description}>
-          Hello Jos, sign in to continue!
-Or<Pressable onPress={() => router.push("/signup")}  hitSlop={12} style={{justifyContent:"center"}} ><Text style={{ color: theme.colors.red['400'],fontSize:16 }}>Create new account</Text></Pressable>  
-  
+      <Text style={styles.title}>Hello! Create Account</Text>
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        gap: 4,
+        marginBottom: 24,
+        paddingHorizontal: 20,
+      }}
+    >
+      <Text style={{ fontSize: 16, color: '#666' }}>Already have an account?</Text>
+
+      <Pressable onPress={() => router.push('/signin')} hitSlop={12}>
+        <Text
+          style={{
+            color: theme.colors.red['400'],
+            fontSize: 16,
+          }}
+        >
+          Sign In
         </Text>
+      </Pressable>
+    </View>
       <View style={styles.buttonContainer}>
         <CustomTextInput
-                  placeholder="Username or Email"
-                  keyboardType="email-address"
-                  value={email}
-                  onChangeText={setEmail}
+                  placeholder="Your name"
+                  value={username}
+                  onChangeText={setUsername}
                   />
+        <CustomTextInput
+          placeholder="Username or Email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          />
            <PasswordInput
               placeholder="Password"
                   value={password}
                   onChangeText={setPassword}
               
             />        
-        <PrimaryButton text={"Sign In"} onPress={handleClick} />
-        <Link href={"./onboarding"} style={{color:theme.colors.red["400"],alignSelf:"center"}}>Forgot Password?</Link>
+        <PrimaryButton text={"Sign Up"} onPress={handleClick} />
+        <Link href={"/signin"} style={{color:theme.colors.red["400"],alignSelf:"center"}}>Forgot Password?</Link>
         <View style={{flexDirection:"row",alignItems:"center",justifyContent:"center",gap:10,marginTop:10}}>
            <View style={{backgroundColor:theme.colors.neutral["42_card_list"],width:130,height:2,justifyContent:"center"}}/>
             <Text>OR</Text>
@@ -83,9 +106,12 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     textAlign: 'center',
+    alignItems:"center",
+    justifyContent:"center",
+    gap: 8,
     marginBottom: 24,
     paddingHorizontal: 20,
-    color: '#666'
+    color: '#666',
   },
   buttonContainer: {
     flexDirection: 'column',

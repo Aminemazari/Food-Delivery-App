@@ -1,20 +1,20 @@
+import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useFonts } from 'expo-font';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 import {
-  PaperProvider,
-  MD3LightTheme as PaperLightTheme,
   MD3DarkTheme as PaperDarkTheme,
+  MD3LightTheme as PaperLightTheme,
+  PaperProvider,
 } from 'react-native-paper';
 
 import {
-  ThemeProvider,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationLightTheme,
+  ThemeProvider,
 } from '@react-navigation/native';
 
 export default function RootLayout() {
@@ -23,69 +23,39 @@ export default function RootLayout() {
   const [loaded] = useFonts({
   SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   Poppins: require('../assets/fonts/Poppins-Regular.ttf'),
+  DMSans : require("../assets/fonts/DMSans-Regular.ttf"),
   Sen: require('../assets/fonts/Sen-Regular.ttf'),  });
 
   if (!loaded) return null;
 
  const lightTheme = {
-  ...PaperLightTheme,
+  ...PaperLightTheme, // Keep all defaults
   colors: {
-    ...PaperLightTheme.colors,
-    primary: '#ef9f27',
-    secondary: '#7a869a',
+    ...PaperLightTheme.colors, // Keep default colors
+    primary: '#ef9f27', // Only override primary
+    secondary: '#7a869a', // And secondary if needed
   },
   fonts: {
-    // Default variants (required by Paper)
+    ...PaperLightTheme.fonts, // Keep all default font variants
     regular: {
-      fontFamily: 'Poppins',
-      fontWeight: '700',
+      fontFamily: 'DMSans', // Only override default regular
+      fontWeight: 'normal',
     },
     medium: {
-      fontFamily: 'Poppins',
+      fontFamily: 'DMSans', // Only override medium
       fontWeight: '500',
-    },
-    light: {
-      fontFamily: 'Sen',
-      fontWeight: '300',
-    },
-    thin: {
-      fontFamily: 'Sen',
-      fontWeight: '200',
-    },
-    // Add missing variants (used by Button, Text, etc.)
-    labelLarge: {
-      fontFamily: 'Poppins',
-      fontWeight: '500',
-      fontSize: 14,
-      lineHeight: 20,
-      letterSpacing: 0.1,
-    },
-    labelMedium: {
-      fontFamily: 'Poppins',
-      fontWeight: '500',
-      fontSize: 12,
-      lineHeight: 16,
-      letterSpacing: 0.5,
-    },
-    labelSmall: {
-      fontFamily: 'Poppins',
-      fontWeight: '500',
-      fontSize: 11,
-      lineHeight: 16,
-      letterSpacing: 0.5,
     },
   },
 };
-  const darkTheme = {
-    ...PaperDarkTheme,
-    colors: {
-      ...PaperDarkTheme.colors,
-      
-      background: '#121212',
-      
-      
-    },
-  };
+
+const darkTheme = {
+  ...PaperDarkTheme, // Keep all dark defaults
+  colors: {
+    ...PaperDarkTheme.colors,
+    primary: '#ef9f27', // Same primary in dark mode
+  },
+  // No need to repeat fonts - they'll inherit from lightTheme
+};
 
   const paperTheme = colorScheme === 'dark' ? darkTheme : lightTheme;
   const navigationTheme = colorScheme === 'dark' ? NavigationDarkTheme : NavigationLightTheme;
@@ -93,11 +63,13 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={navigationTheme}>
-        <Stack initialRouteName='welcome'>
-          <Stack.Screen name="welcome" options={{ headerShown: false }} />
-          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack initialRouteName="(tabs)" screenOptions={{headerShown: false}}>
+          <Stack.Screen name="welcome"  />
+          <Stack.Screen name="address"/>
+          <Stack.Screen name="onboarding"  />
+           <Stack.Screen name="signup"  />
+           <Stack.Screen name="signin"  />
+          <Stack.Screen name="(tabs)"  />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="auto" />
