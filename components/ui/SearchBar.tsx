@@ -17,9 +17,12 @@ const filterOptions = [
   { label: 'Fastest Delivery', icon: <Ionicons name="time" size={24} color={theme.colors.neutral["50"]} /> },
   { label: 'Most Popular', icon: <FontAwesome5 name="fire" size={24} color={theme.colors.neutral["50"]} /> },
 ];
+type SearchBarProps = {
+  value: string;
+  onChangeText: (text: string) => void;
+};
 
-export default function SearchBar() {
-  const [search, setSearch] = useState("");
+export default function SearchBar({ value, onChangeText }: SearchBarProps) {
   const [selectedTab, setSelectedTab] = useState("Category");
   const [filterVisible, setFilterVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -64,9 +67,9 @@ export default function SearchBar() {
     <View style={style.container}>
       <IconInput
         placeholder="Search on Coody"
-        value={search}
+        value={value}
         icon={<FontAwesome6 name="location-dot" size={24} color={theme.colors.neutral["50"]} />}
-        onChangeText={setSearch}
+        onChangeText={onChangeText}
       />
 
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 10, gap: 20, paddingLeft: 10 }}>

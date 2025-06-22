@@ -63,8 +63,10 @@ const darkTheme = {
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={navigationTheme}>
-        <Stack initialRouteName="welcome" screenOptions={{headerShown: false}}>
+        <Stack initialRouteName="shop/[id]" screenOptions={{headerShown: false}}>
           <Stack.Screen name="welcome"  />
+          <Stack.Screen name="shop/[id]"  />
+          <Stack.Screen name="BestPartners"  />
           <Stack.Screen name="address"/>
           <Stack.Screen name="onboarding"  />
            <Stack.Screen name="signup"  />
